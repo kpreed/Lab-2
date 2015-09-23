@@ -30,6 +30,7 @@ public class Hand
 	public static int judgeHand(Hand hand)
 	{
 		Collections.sort(hand);
-		
 	}
+	
+	
 }
