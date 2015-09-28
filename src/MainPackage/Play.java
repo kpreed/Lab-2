@@ -14,12 +14,16 @@ public class Play
 		String exit = "Y";
 		Deck deck = new Deck();
 		
-		while (exit != "N")
+		while (!exit.equals("N"))
 		{
 			Hand hand1 = new Hand(deck);
 			Hand hand2 = new Hand(deck);
 			Hand hand3 = new Hand(deck);
 			Hand hand4 = new Hand(deck);
+			hand1.sortHand();
+			hand2.sortHand();
+			hand3.sortHand();
+			hand4.sortHand();
 			ArrayList<Hand> hands = new ArrayList<Hand>();
 			hands.add(hand1);
 			hands.add(hand2);

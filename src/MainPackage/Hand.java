@@ -60,8 +60,7 @@ public class Hand
 	}
 	
 	/**
-	 * @param hand the hand to be sorted
-	 * @return the sorted hand
+	 * Sorts the Hand
 	 */
 	public void sortHand()
 	{
@@ -132,6 +131,7 @@ public class Hand
 			//Sorts hand and then judges each hand to get its rank
 			hands.get(i).sortHand();
 			int judge = judgeHand(hands.get(i));
+			System.out.println(judge);
 			//System.out.println(judge);
 			
 			//If the hand being judged is the highest hand, that's the new winner
@@ -167,7 +167,7 @@ public class Hand
 					{
 						highHand = judgedHand;
 						playerWithHighest = i;
-						winners = new ArrayList<Integer>();
+						winners.clear();
 						winners.add(i);
 					}
 				}
@@ -250,7 +250,7 @@ public class Hand
 					}
 				}
 				
-				/*if (highest == 5)
+				if (highest == 5)
 				{
 					ArrayList<Hand> tieHands = new ArrayList<Hand>();
 					tieHands.add(highHand);
@@ -378,7 +378,7 @@ public class Hand
 						winners = new ArrayList<Integer>();
 						winners.add(i+1);
 					}
-				}*/
+				}
 			}
 		}
 		return winners;

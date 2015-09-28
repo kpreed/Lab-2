@@ -10,7 +10,7 @@ public class Judgers
 {
 	public static boolean isPair(Hand hand)
 	{
-		for (int i = 0; i < (hand.getHand().size() - 2); i++)
+		for (int i = 0; i < (hand.getHand().size() - 1); i++)
 		{
 			if (hand.getHand().get(i).getRank() == hand.getHand().get(i + 1).getRank())
 				return true;
@@ -40,7 +40,7 @@ public class Judgers
 
 	public static boolean isThreeOfAKind(Hand hand)
 	{
-		for (int i = 0; i < (hand.getHand().size() - 3); i++)
+		for (int i = 0; i < (hand.getHand().size() - 2); i++)
 		{
 			if (hand.getHand().get(i).getRank() == hand.getHand().get(i + 1).getRank()
 					&& hand.getHand().get(i + 1).getRank() == hand.getHand().get(i + 2).getRank())
@@ -152,51 +152,65 @@ public class Judgers
 			return true;
 		return false;
 	}
-
+	
+	/**
+	 * This tie breaker doesn't work correctly
+	 */
 	public static Hand highCardTieBreak(ArrayList<Hand> hands)
 	{
 		if (hands.get(0).getHand().get(4).getRank() == hands.get(1).getHand().get(4).getRank())
+		{
 			if (hands.get(0).getHand().get(3).getRank() == hands.get(1).getHand().get(3).getRank())
+			{
 				if (hands.get(0).getHand().get(2).getRank() == hands.get(1).getHand().get(2).getRank())
+				{
 					if (hands.get(0).getHand().get(1).getRank() == hands.get(1).getHand().get(1).getRank())
+					{
 						if (hands.get(0).getHand().get(0).getRank() == hands.get(1).getHand().get(0).getRank())
 							return new Hand();
 						else if (hands.get(0).getHand().get(0).getRank() > hands.get(1).getHand().get(0).getRank())
 							return hands.get(0);
 						else
 							return hands.get(1);
+					}
 					else if (hands.get(0).getHand().get(1).getRank() > hands.get(1).getHand().get(1).getRank())
 						return hands.get(0);
 					else
 						return hands.get(1);
+				}
 				else if (hands.get(0).getHand().get(2).getRank() > hands.get(1).getHand().get(2).getRank())
 					return hands.get(0);
 				else
 					return hands.get(1);
+			}
 			else if (hands.get(0).getHand().get(3).getRank() > hands.get(1).getHand().get(3).getRank())
 				return hands.get(0);
 			else
 				return hands.get(1);
+		}
 		else if (hands.get(0).getHand().get(4).getRank() > hands.get(1).getHand().get(4).getRank())
 			return hands.get(0);
 		else
 			return hands.get(1);
 	}
-
+	/**
+	 * This tie breaker doesn't work.
+	 */
 	public static Hand pairTieBreak(ArrayList<Hand> hands)
 	{
 		ArrayList<Card> hand1 = hands.get(0).getHand();
 		ArrayList<Card> hand2 = hands.get(1).getHand();
 		Card hand1pair = null;
 		Card hand2pair = null;
+		int[] pair1index = {0,0};
+		int[] pair2index = {0,0};
 
 		for (int i = 0; i < (hand1.size() - 2); i++)
 		{
 			if (hand1.get(i).getRank() == hand1.get(i + 1).getRank())
 			{
-				hand1pair = hand1.get(i);
-				hand1.remove(i);
-				hand1.remove(i + 1);
+				pair1index[0] = i;
+				pair1index[1] = i+1;
 				break;
 			}
 		}
@@ -205,31 +219,36 @@ public class Judgers
 		{
 			if (hand2.get(i).getRank() == hand2.get(i + 1).getRank())
 			{
-				hand2pair = hand2.get(i);
-				hand2.remove(i);
-				hand2.remove(i + 1);
+				pair2index[0] = i;
+				pair2index[1] = i+1;
 				break;
 			}
 		}
 
-		if (hand1pair.getRank() == hand2pair.getRank())
+		if (hand1.get(pair1index[0]).getRank() == hand2.get(pair2index[0]).getRank())
+		{
 			if (hand1.get(2).getRank() == hand2.get(2).getRank())
+			{
 				if (hand1.get(1).getRank() == hand2.get(1).getRank())
+				{
 					if (hand1.get(0).getRank() == hand2.get(0).getRank())
 						return new Hand();
 					else if (hand1.get(0).getRank() > hand2.get(0).getRank())
 						return hands.get(0);
 					else
 						return hands.get(1);
+				}
 				else if (hand1.get(1).getRank() > hand2.get(1).getRank())
 					return hands.get(0);
 				else
 					return hands.get(1);
+			}
 			else if (hand1.get(2).getRank() > hand2.get(2).getRank())
 				return hands.get(0);
 			else
 				return hands.get(1);
-		else if (hand1pair.getRank() > hand2pair.getRank())
+		}
+		else if (hand1.get(pair1index[0]).getRank() > hand2.get(pair2index[0]).getRank())
 			return hands.get(0);
 		else
 			return hands.get(1);
@@ -313,8 +332,8 @@ public class Judgers
 			{
 				hand1ThreeOfAKind = hand1.get(i);
 				hand1.remove(i);
-				hand1.remove(i + 1);
-				hand1.remove(i + 2);
+				hand1.remove(i);
+				hand1.remove(i);
 				break;
 			}
 		}
@@ -325,8 +344,8 @@ public class Judgers
 			{
 				hand2ThreeOfAKind = hand2.get(i);
 				hand2.remove(i);
-				hand2.remove(i + 1);
-				hand2.remove(i + 2);
+				hand2.remove(i);
+				hand2.remove(i);
 				break;
 			}
 		}
@@ -358,5 +377,49 @@ public class Judgers
 			return hands.get(0);
 		else
 			return hands.get(1);
+	}
+	
+	public static Hand flushTieBreak(ArrayList<Hand> hands)
+	{
+		if (hands.get(0).getHand().get(4).getRank() == hands.get(1).getHand().get(4).getRank())
+			return new Hand();
+		else if (hands.get(0).getHand().get(4).getRank() == hands.get(1).getHand().get(4).getRank())
+			return hands.get(0);
+		else
+			return hands.get(1);
+	}
+	
+	public static Hand fullHouseTieBreak(ArrayList<Hand> hands)
+	{
+		if (hands.get(0).getHand().get(4).getRank() == hands.get(1).getHand().get(4).getRank())
+			return new Hand();
+		else if (hands.get(0).getHand().get(4).getRank() == hands.get(1).getHand().get(4).getRank())
+			return hands.get(0);
+		else
+			return hands.get(1);
+	}
+	
+	public static Hand fourOfAKindTieBreak(ArrayList<Hand> hands)
+	{
+		if (hands.get(0).getHand().get(4).getRank() == hands.get(1).getHand().get(4).getRank())
+			return new Hand();
+		else if (hands.get(0).getHand().get(4).getRank() == hands.get(1).getHand().get(4).getRank())
+			return hands.get(0);
+		else
+			return hands.get(1);
+	}
+	
+	public static Hand straightFlushTieBreak(ArrayList<Hand> hands)
+	{
+		if (hands.get(0).getHand().get(4).getRank() == hands.get(1).getHand().get(4).getRank())
+			return new Hand();
+		else if (hands.get(0).getHand().get(4).getRank() == hands.get(1).getHand().get(4).getRank())
+			return hands.get(0);
+		else
+			return hands.get(1);
+	}
+	public static Hand royalFlushTieBreak(ArrayList<Hand> hands)
+	{
+		return new Hand();
 	}
 }
