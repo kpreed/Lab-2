@@ -10,7 +10,7 @@ public class Judgers
 {
 	public static boolean isPair(Hand hand)
 	{
-		for (int i = 0; i < (hand.getHand().size() - 1); i++)
+		for (int i = 0; i < (hand.getHand().size() - 2); i++)
 		{
 			if (hand.getHand().get(i).getRank() == hand.getHand().get(i + 1).getRank())
 				return true;
@@ -40,7 +40,7 @@ public class Judgers
 
 	public static boolean isThreeOfAKind(Hand hand)
 	{
-		for (int i = 0; i < (hand.getHand().size() - 2); i++)
+		for (int i = 0; i < (hand.getHand().size() - 3); i++)
 		{
 			if (hand.getHand().get(i).getRank() == hand.getHand().get(i + 1).getRank()
 					&& hand.getHand().get(i + 1).getRank() == hand.getHand().get(i + 2).getRank())
@@ -190,7 +190,7 @@ public class Judgers
 		Card hand1pair = null;
 		Card hand2pair = null;
 
-		for (int i = 0; i < (hand1.size() - 1); i++)
+		for (int i = 0; i < (hand1.size() - 2); i++)
 		{
 			if (hand1.get(i).getRank() == hand1.get(i + 1).getRank())
 			{
@@ -201,7 +201,7 @@ public class Judgers
 			}
 		}
 
-		for (int i = 0; i < (hand2.size() - 1); i++)
+		for (int i = 0; i < (hand2.size() - 2); i++)
 		{
 			if (hand2.get(i).getRank() == hand2.get(i + 1).getRank())
 			{
@@ -307,7 +307,7 @@ public class Judgers
 		Card hand1ThreeOfAKind = null;
 		Card hand2ThreeOfAKind = null;
 
-		for (int i = 0; i < (hand1.size() - 2); i++)
+		for (int i = 0; i < (hand1.size() - 3); i++)
 		{
 			if (hand1.get(i) == hand1.get(i + 1) && hand1.get(i + 1) == hand1.get(i + 2))
 			{

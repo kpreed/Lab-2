@@ -25,16 +25,13 @@ public class Play
 			hands.add(hand2);
 			hands.add(hand3);
 			hands.add(hand4);
-			ArrayList<Integer> winners = Hand.judgeHands(hands);
-			System.out.println(hand1.getHand().size());
-			System.out.println(hand2.getHand().size());
-			System.out.println(hand3.getHand().size());
-			System.out.println(hand4.getHand().size());
-			
 			System.out.println("Player 1's hand is:\n" + hand1.toString());
 			System.out.println("Player 2's hand is:\n" + hand2.toString());
 			System.out.println("Player 3's hand is:\n" + hand3.toString());
 			System.out.println("Player 4's hand is:\n" + hand4.toString());
+			
+			ArrayList<Integer> winners = Hand.judgeHands(hands);			
+
 			
 			@SuppressWarnings("unused")
 			String printWin = "";
