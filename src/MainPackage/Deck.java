@@ -12,7 +12,7 @@ public class Deck
 		String [] suits = {"Hearts","Diamonds","Spades","Clubs"};
 		for (String i:suits)
 		{
-			for(int j = 1;j <= 13;j++)
+			for(int j = 2;j <= 14;j++)
 			{
 				Card card = new Card(j,i);
 				this.deck.add(card);

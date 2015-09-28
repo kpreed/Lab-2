@@ -1,27 +1,32 @@
 package MainPackage;
-import java.util.Comparator;
 
-public class Card implements Comparator<Card>
+public class Card
 {
-	public Card()
-	{
-		
-	}
+	private int rank;
+	private String suit;
 	
 	public Card(int rank, String suit)
 	{
-		
+		this.rank = rank;
+		this.suit = suit;
 	}
 	
-	@Override
-	public int compare(Card card1, Card card2)
+	public int getRank()
 	{
-		if(card1.getRank() > card2.getRank())
-			return 1;
-		else if(card1.getRank() < card2.getRank())
-			return -1;
-		else
-			return 0;
+		return this.rank;
 	}
+	
+	public String getSuit()
+	{
+		return this.suit;	
+	}
+	
+	public int compareTo(Card otherCard)
+	{
+		if(this.rank == otherCard.getRank())
+			return 0;
+		return this.rank < otherCard.getRank() ? -1 : 1;
+	}
+	
 	
 }
